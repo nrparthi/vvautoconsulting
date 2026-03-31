@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   otherCtaButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
+        fbq('track', 'Contact', {
           event_source: 'Direct Click / WhatsApp Float'
         });
       }
