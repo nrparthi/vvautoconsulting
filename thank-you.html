@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You! - Vazga Valamudan</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .thank-you-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .check-icon {
+      font-size: 5rem;
+      color: #25d366;
+      margin-bottom: 20px;
+    }
+  </style>
+  
+  <!-- Meta Pixel Code Placeholder -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3014719672048169');
+    fbq('track', 'PageView');
+    
+    // Track Lead on Thank You page load
+    fbq('track', 'Lead');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3014719672048169&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="thank-you-container">
+    <i class="fas fa-check-circle check-icon"></i>
+    <h1>Thank you for applying!</h1>
+    <p class="mt-4" style="margin-top: 15px; margin-bottom: 30px; font-size: 1.2rem; color: var(--text-muted);">
+      Please click the button below to complete your application instantly via WhatsApp.
+    </p>
+    <a href="https://wa.me/919363777659?text=Hi!%20I%20have%20submitted%20my%20details%20and%20need%20a%20loan%20approval!" class="primary-btn pulse-anim" id="waRedirectBtn" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-whatsapp"></i> Chat with us Now!
+    </a>
+    <a href="index.html" style="margin-top: 20px; color: var(--text-muted); text-decoration: underline;">Back to Home</a>
+  </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const storedLink = localStorage.getItem('waLink');
+      if (storedLink) {
+        // Update the button link just in case they want to click it manually
+        document.getElementById('waRedirectBtn').href = storedLink;
+        
+        // Auto-redirect to WhatsApp after 2 seconds
+        setTimeout(() => {
+          window.location.href = storedLink;
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
