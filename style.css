@@ -485,3 +485,9 @@ a {
   background-color: transparent !important;
   padding-left: 0;
 }
+
+.location-list span {
+  background-color: #ffeb3b !important;
+  color: #000 !important;
+  border: 1px solid #fdd835;
+}
