@@ -63,12 +63,34 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const storedLink = localStorage.getItem('waLink');
+      const waButton = document.getElementById('waRedirectBtn');
+
+      // Manual Click Tracking
+      waButton.addEventListener('click', () => {
+        if (typeof fbq === 'function') {
+          fbq('track', 'Contact', {
+            content_name: 'WhatsApp Click',
+            value: 1,
+            currency: 'INR'
+          });
+        }
+      });
+
       if (storedLink) {
         // Update the button link just in case they want to click it manually
-        document.getElementById('waRedirectBtn').href = storedLink;
+        waButton.href = storedLink;
         
         // Auto-redirect to WhatsApp after 2 seconds
         setTimeout(() => {
+          // Fire Contact event BEFORE auto-redirect
+          if (typeof fbq === 'function') {
+            fbq('track', 'Contact', {
+              content_name: 'WhatsApp Click',
+              value: 1,
+              currency: 'INR'
+            });
+          }
+          
           window.location.href = storedLink;
         }, 2000);
       }
