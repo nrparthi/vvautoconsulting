@@ -451,3 +451,37 @@ a {
   .logo img { height: 40px; }
   .cta-button { padding: 6px 12px; font-size: 0.8rem; }
 }
+
+.location-tag {
+  color: #616161;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.location-list span {
+  display: inline-block;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 12px;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.location-list .nearby {
+  font-weight: normal;
+  font-size: 1rem;
+  color: #616161;
+  background-color: transparent !important;
+  padding-left: 0;
+}
