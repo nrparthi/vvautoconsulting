@@ -29,6 +29,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Local Business Schema (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://vvautoconsulting.online",
+    "name": "Vazga Valamudan Auto Finance & Consulting",
+    "image": "https://vvautoconsulting.online/valga%20(2).jpeg",
+    "url": "https://vvautoconsulting.online",
+    "telephone": "+919363777659",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kallipatti",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "areaServed": ["Kallipatti", "Vellithiruppur", "Sanisanthai", "Gobi"],
+    "description": "Fast approval Car and Bike loans in Kallipatti, Vellithiruppur, and Sanisanthai. Low interest and easy EMI options.",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "09:00",
+      "closes": "21:00"
+    }
+  }
+  </script>
+
   <!-- Meta Pixel Code -->
   <script>
     !function (f, b, e, v, n, t, s) {
@@ -66,7 +93,7 @@
     <div class="container hero-container">
       <div class="hero-content">
         <div class="offer-tag"><i class="fas fa-hourglass-half"></i> Limited Time: Low Interest Offer!</div>
-        <h1>💥 Car / Bike loan venuma? <br><span>10 minutes la approval!</span></h1>
+        <h1>🔥 Fast Car & Bike Loans in <br><span>Kallipatti, Vellithiruppur & Sanisanthai</span></h1>
 
         <div class="hero-features">
           <span><i class="fas fa-check-circle"></i> Low interest</span>
@@ -161,36 +188,45 @@
     </div>
   </section>
 
-  <!-- Feedback & Area -->
-  <section class="social-proof">
+  <!-- Eligibility & Documents (New SEO Section) -->
+  <section class="eligibility-section" style="padding: 60px 0; background-color: #050505;">
     <div class="container">
-      <div class="feedback-area-grid">
-
-        <!-- Customer Feedback -->
-        <div class="feedback">
-          <h2>💬 Customer Feedback</h2>
-          <div class="testimonial">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>“10 minutes la loan approve aayiduchu!”</p>
-          </div>
-          <div class="testimonial">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>“Very easy process!”</p>
-          </div>
+      <div class="details-grid" style="grid-template-columns: 1fr 1fr;">
+        <div>
+          <h2 style="font-size: 2rem; margin-bottom: 30px; color: var(--primary);">📄 Documents Required</h2>
+          <ul class="why-list">
+            <li><i class="fas fa-id-card"></i> <div><h4>Aadhar Card</h4><p>Mandatory for identity & address proof.</p></div></li>
+            <li><i class="fas fa-file-invoice"></i> <div><h4>PAN Card</h4><p>Required for financial verification.</p></div></li>
+            <li><i class="fas fa-university"></i> <div><h4>Bank Statement / Passbook</h4><p>3-6 months statement for eligibility.</p></div></li>
+            <li><i class="fas fa-portrait"></i> <div><h4>Passport Photos</h4><p>2 recent passport size photographs.</p></div></li>
+          </ul>
         </div>
+        <div>
+          <h2 style="font-size: 2rem; margin-bottom: 30px; color: var(--primary);">✅ Eligibility Criteria</h2>
+          <ul class="why-list">
+            <li><i class="fas fa-user-check"></i> <div><h4>Age 21+ Years</h4><p>Applicant should be 21 to 65 years old.</p></div></li>
+            <li><i class="fas fa-briefcase"></i> <div><h4>Stable Income</h4><p>Salaried or Self-employed professionals.</p></div></li>
+            <li><i class="fas fa-map-marked-alt"></i> <div><h4>Local Resident</h4><p>Living in Kallipatti, Vellithiruppur or nearby.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Service Area -->
-        <div class="service-area">
-          <h2>Our Service Areas</h2>
-          <div class="location-list">
-            <span>📍 Kallipatti</span>
-            <span>📍 Vellithiruppur</span>
-            <span>📍 Sanisanthai & nearby areas</span>
+        <!-- FAQ Section (New SEO Section) -->
+        <div class="feedback">
+          <h2>❓ Frequently Asked Questions</h2>
+          <div class="testimonial">
+            <h3>🔹 How long does the approval take?</h3>
+            <p>Our process is super fast! We typically approve loans in 10-15 minutes once documents are verified.</p>
           </div>
-
-          <div class="contact-box mt-4">
-            <h2>📞 Contact Us</h2>
-            <p>👉 Call / WhatsApp: <a href="tel:+919363777659"><strong>9363777659</strong></a></p>
+          <div class="testimonial">
+            <h3>🔹 What is the interest rate?</h3>
+            <p>We offer very competitive low-interest rates starting from minimal basic percentages.</p>
+          </div>
+          <div class="testimonial">
+             <h3>🔹 Do you finance used vehicles?</h3>
+             <p>Yes! We provide loans for both brand new and used (second-hand) cars and bikes.</p>
           </div>
         </div>
 
