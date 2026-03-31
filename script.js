@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fire Facebook Pixel Lead Event
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', {
-            content_name: loanType + ' Loan Inquiry'
+            content_name: loanType + ' Loan Inquiry',
+            event_source: 'Form Submission'
           });
         }
         
@@ -89,4 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1500);
     });
   }
+
+  // --- Track Clicks on All Other WhatsApp/Apply Buttons ---
+  const otherCtaButtons = document.querySelectorAll('.cta-button, .primary-btn:not(#submitBtn), .whatsapp-float, .final-cta a');
+  otherCtaButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          event_source: 'Direct Click / WhatsApp Float'
+        });
+      }
+    });
+  });
 });
