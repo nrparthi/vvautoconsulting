@@ -24,7 +24,7 @@
     }
   </style>
   
-  <!-- Meta Pixel Code Placeholder -->
+  <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,8 +37,10 @@
     fbq('init', '3014719672048169');
     fbq('track', 'PageView');
     
-    // Track Lead on Thank You page load
-    fbq('track', 'Lead');
+    // ViewContent on Thank You Page load
+    fbq('track', 'ViewContent', {
+      content_name: 'Thank You Page'
+    });
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=3014719672048169&ev=PageView&noscript=1"

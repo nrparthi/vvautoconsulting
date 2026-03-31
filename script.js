@@ -2,13 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('leadForm');
   const submitBtn = document.getElementById('submitBtn');
 
-  // Smooth scroll for anchor links
+  // Smooth scroll and ViewContent tracking for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
       const targetElement = document.querySelector(targetId);
       
+      // Track ViewContent for Eligibility Check
+      if (targetId === '#apply' && typeof fbq === 'function') {
+        fbq('track', 'ViewContent', {
+          content_name: 'Loan Eligibility Check'
+        });
+      }
+
       targetElement.scrollIntoView({
         behavior: 'smooth'
       });
@@ -62,11 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const loanType = document.getElementById('loanType').value;
         
         // --- Conversion Tracking ---
-        // Fire Facebook Pixel Lead Event
+        // Fire Facebook Pixel Lead Event (Fire ONLY once here)
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', {
-            content_name: loanType + ' Loan Inquiry',
-            event_source: 'Form Submission'
+            content_name: 'Loan Form Submitted',
+            value: 1,
+            currency: 'INR'
           });
         }
         
@@ -97,7 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       if (typeof fbq === 'function') {
         fbq('track', 'Contact', {
-          event_source: 'Direct Click / WhatsApp Float'
+          content_name: 'WhatsApp Click',
+          value: 1,
+          currency: 'INR'
         });
       }
     });
