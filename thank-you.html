@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,36 +18,36 @@
       flex-direction: column;
       padding: 20px;
     }
+
     .check-icon {
       font-size: 5rem;
       color: #25d366;
       margin-bottom: 20px;
     }
   </style>
-  
+
   <!-- Meta Pixel Code -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '3014719672048169');
     fbq('track', 'PageView');
-    
-    // ViewContent on Thank You Page load
-    fbq('track', 'ViewContent', {
-      content_name: 'Thank You Page'
-    });
+    fbq('track', 'Lead');
   </script>
   <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3014719672048169&ev=PageView&noscript=1"
-  /></noscript>
+      src="https://www.facebook.com/tr?id=3014719672048169&ev=PageView&noscript=1" /></noscript>
   <!-- End Meta Pixel Code -->
 </head>
+
 <body>
   <div class="thank-you-container">
     <i class="fas fa-check-circle check-icon"></i>
@@ -54,47 +55,46 @@
     <p class="mt-4" style="margin-top: 15px; margin-bottom: 30px; font-size: 1.2rem; color: var(--text-muted);">
       Please click the button below to complete your application instantly via WhatsApp.
     </p>
-    <a href="https://wa.me/919363777659?text=Hi!%20I%20have%20submitted%20my%20details%20and%20need%20a%20loan%20approval!" class="primary-btn pulse-anim" id="waRedirectBtn" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/919363777659?text=Hi!%20I%20have%20submitted%20my%20details%20and%20need%20a%20loan%20approval!"
+      class="primary-btn pulse-anim" id="waRedirectBtn" target="_blank" rel="noopener noreferrer">
       <i class="fab fa-whatsapp"></i> Chat with us Now!
     </a>
-    <a href="index.html" style="margin-top: 20px; color: var(--text-muted); text-decoration: underline;">Back to Home</a>
+    <a href="index.html" style="margin-top: 20px; color: var(--text-muted); text-decoration: underline;">Back to
+      Home</a>
   </div>
-  
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const storedLink = localStorage.getItem('waLink');
       const waButton = document.getElementById('waRedirectBtn');
+      
+      let contactFired = false;
 
       // Manual Click Tracking
       waButton.addEventListener('click', () => {
-        if (typeof fbq === 'function') {
-          fbq('track', 'Contact', {
-            content_name: 'WhatsApp Click',
-            value: 1,
-            currency: 'INR'
-          });
+        if (typeof fbq === 'function' && !contactFired) {
+          fbq('track', 'Contact');
+          contactFired = true;
         }
       });
 
       if (storedLink) {
         // Update the button link just in case they want to click it manually
         waButton.href = storedLink;
-        
+
         // Auto-redirect to WhatsApp after 2 seconds
         setTimeout(() => {
           // Fire Contact event BEFORE auto-redirect
-          if (typeof fbq === 'function') {
-            fbq('track', 'Contact', {
-              content_name: 'WhatsApp Click',
-              value: 1,
-              currency: 'INR'
-            });
+          if (typeof fbq === 'function' && !contactFired) {
+            fbq('track', 'Contact');
+            contactFired = true;
           }
-          
+
           window.location.href = storedLink;
         }, 2000);
       }
     });
   </script>
 </body>
+
 </html>
