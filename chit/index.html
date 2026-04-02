@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Chit Fund Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calculator-container">
+        <!-- Summary Bar (Visible only in Result Mode) -->
+        <div id="inputSummaryBar" class="summary-bar hidden">
+            <div class="summary-info">
+                <span id="sumChit"></span> | <span id="sumInst"></span> | <span id="sumAuction"></span>
+            </div>
+            <button id="editBtn" class="edit-pill">Edit</button>
+        </div>
+
+        <header class="calc-header" id="mainHeader">
+            <h1>Chit Fund Calculator</h1>
+            <p>Calculate your chit returns, monthly yield, and decide if it's the right time to bid.</p>
+        </header>
+
+        <div class="calc-grid">
+            <!-- INPUTS SECTION -->
+            <div class="card input-section" id="inputSection">
+                <h2>Chit Details</h2>
+
+                <div class="form-group">
+                    <label for="totalChit">Total Chit Amount (₹)</label>
+                    <input type="number" id="totalChit" placeholder="e.g., 1600000" min="0">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalMembers">Total Installments (Members)</label>
+                        <input type="number" id="totalMembers" placeholder="e.g., 16" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="currentMonth">Current Installment No.</label>
+                        <input type="number" id="currentMonth" placeholder="e.g., 3" min="1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="auctionFrequency">Auction Frequency (Months)</label>
+                        <input type="number" id="auctionFrequency" placeholder="e.g., 1" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="auctionAmount">Auction Amount (₹)</label>
+                        <input type="number" id="auctionAmount" placeholder="e.g., 500000" min="0">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <h2>Configuration</h2>
+
+                <!-- 1. Commission -->
+                <div class="form-group">
+                    <label>Commission Type</label>
+                    <select id="commissionType">
+                        <option value="percentage">Percentage</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <div class="form-group" id="commissionPercentGroup">
+                    <label for="commissionPercent">Commission Percentage (%)</label>
+                    <input type="number" id="commissionPercent" placeholder="e.g., 5" min="0" max="10" step="0.1"
+                        value="5">
+                </div>
+
+                <!-- 2. Dividend Distribution -->
+                <div class="form-group">
+                    <label>Winner Payment Rules</label>
+                    <select id="dividendType">
+                        <option value="non_winners">Current Winner gets the dividend discount</option>
+                        <option value="strict">Current Winner pays full amount</option>
+                        <option value="all">All members (including past winners) gets dividend</option>
+                    </select>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button class="btn btn-primary" id="calculateBtn">Calculate Results</button>
+            </div>
+
+            <!-- RESULTS SECTION -->
+            <div class="card result-section" id="resultCard" style="display: none;">
+                <!-- PRIMARY DECISION BLOCK -->
+                <div class="primary-decision">
+                    <div class="net-received-block">
+                        <span class="label">You Receive</span>
+                        <span class="value highlight-green" id="resNetReceived">₹0</span>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="label">Discount %</span>
+                            <span class="value" id="resDiscount">0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="label">Effective Cost %</span>
+                            <span class="value" id="resEffectiveCost">0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="label">Per-Installment Yield %</span>
+                            <span class="value highlight-blue" id="resMonthlyYield">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- MONTHLY IMPACT -->
+                <div class="result-block">
+                    <h3>Installment Impact</h3>
+                    <div class="result-row">
+                        <span>Installment Chit Amount</span>
+                        <span id="resMonthlyAmount" class="text-bold">₹0</span>
+                    </div>
+                    <div class="result-row highlight-row">
+                        <span>Installment Payable</span>
+                        <span id="resPayable" class="text-large text-bold highlight-blue">₹0</span>
+                    </div>
+                    <div class="result-row text-green">
+                        <span>Installment Savings</span>
+                        <span id="resSavings">₹0</span>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- BREAKDOWN -->
+                <div class="result-block">
+                    <h3>Breakdown</h3>
+                    <div class="result-row">
+                        <span>Auction Amount</span>
+                        <span id="resAuctionAmount">₹0</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Commission Amount</span>
+                        <span id="resCommission">₹0</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Dividend Pool</span>
+                        <span id="resDividendPool">₹0</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Eligible Members</span>
+                        <span id="resEligibleMembers">0</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Dividend per Member</span>
+                        <span id="resDividendPerMember">₹0</span>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <div class="strategy-section">
+                    <h3>Strategy Analysis</h3>
+
+                    <div class="strategy-grid">
+                        <div class="strat-card red">
+                            <h4>Winner (Loan)</h4>
+                            <p>Amount Received: <span id="winnerReceived"></span></p>
+                            <p>Interest Paid: <span id="winnerInterest"></span></p>
+                            <p>Life Interest: <span id="winnerRate"></span></p>
+                            <p>Approx Yearly Interest: <strong class="highlight-blue"><span
+                                        id="winnerRateYearly"></span></strong></p>
+                        </div>
+                        <div class="strat-card green">
+                            <h4>Non-Winner (Investment)</h4>
+                            <p>Total Discount Gain: <span id="nonWinnerRawDiscount"></span></p>
+                            <p>Net Gain: <span id="nonWinnerProfit"></span> <span
+                                    style="font-size: 0.8rem; color: #64748b;">(after comm.)</span></p>
+                            <p>Life Return: <span id="nonWinnerRate"></span></p>
+                            <p>Approx Yearly Return: <strong class="highlight-blue"><span
+                                        id="nonWinnerRateYearly"></span></strong></p>
+                            <p
+                                style="font-size: 0.75rem; margin-top: 0.75rem; color: #64748b; font-style: italic; line-height: 1.3;">
+                                Note: Returns are spread across installments, not received as a lump sum</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- STATUS -->
+                <div class="result-status">
+                    <div class="status-item">
+                        <span class="label">Current Installment</span>
+                        <span class="value" id="resStatusMonth">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Members Taken</span>
+                        <span class="value" id="resStatusTaken">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Installments Left</span>
+                        <span class="value" id="resStatusRemaining">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Time Remaining</span>
+                        <span class="value" id="resTimeRemaining">0</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
