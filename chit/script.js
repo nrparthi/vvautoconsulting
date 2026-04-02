@@ -27,12 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sumInst = document.getElementById('sumInst');
     const sumAuction = document.getElementById('sumAuction');
 
-    // Default values
-    totalChitInput.value = 1600000;
-    totalMembersInput.value = 16;
-    currentMonthInput.value = 3;
-    auctionAmountInput.value = 500000;
-
     // Toggle commission input
     const toggleCommissionInput = () => {
         if (commissionTypeSelect.value === 'percentage') {
